@@ -1,9 +1,8 @@
-use axum::http::{HeaderMap, HeaderName, HeaderValue};
+use axum::http::{HeaderMap, HeaderValue};
 use rmcp::{
-    Error as McpError, RoleServer, ServerHandler, const_string,
+    Error as McpError, ServerHandler,
     model::*,
     schemars::{self, JsonSchema},
-    service::RequestContext,
     tool,
 };
 use serde::{Deserialize, Serialize};
@@ -543,7 +542,7 @@ impl Server {
         };
 
         match res {
-            Ok(res) => Ok(CallToolResult::success(vec![Content::text(
+            Ok(_res) => Ok(CallToolResult::success(vec![Content::text(
                 "Workflow run successful",
             )])),
             Err(err) => Ok(CallToolResult::error(vec![Content::text(format!(
